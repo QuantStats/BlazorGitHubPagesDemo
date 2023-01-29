@@ -11,7 +11,7 @@
 
 
 @code {
-    private string src = "images/IMG_2012.jpg";
+    private string src = "./images/IMG_2012.jpg";
     private void RandomImage()
     {
         var images = new string[] { "IMG_2012.jpg", "IMG_2037.jpg", "IMG_2367.jpg",
@@ -23,7 +23,7 @@
                                     };
         var random = new Random();
         var randomImage = images[random.Next(images.Length)];
-        string temp = $"/images/{randomImage}";      
+        string temp = $"./images/{randomImage}";      
         src = temp;  
     }
 }
