@@ -1,7 +1,31 @@
 ﻿@page "/"
+@using System.Runtime.InteropServices
 
 <PageTitle>Index</PageTitle>
 
 <h1><span style="color:red">❤</span>我们的合照<span style="color:red">❤</span></h1>
 
-<img src="Images/IMG_2012.jpg">
+<img id="image" src=@src alt="Image" />
+<br />
+<button id="click-button" @onclick="RandomImage">🗘</button>
+
+
+@code {
+    private string src = "images/IMG_2012.jpg";
+    private void RandomImage()
+    {
+        var images = new string[] { "IMG_2012.jpg", "IMG_2037.jpg", "IMG_2367.jpg",
+                                    "IMG_2371.jpg", "IMG_2420.jpg", "IMG_5426.jpg",
+                                    "IMG_5709.jpg", "IMG_5760.jpg", "IMG_5838.jpg",
+                                    "IMG_5879.jpg", "IMG_5917.jpg", "IMG_6064.jpg",
+                                    "IMG_6092.jpg", "IMG_6171.jpg"
+
+                                    };
+        var random = new Random();
+        var randomImage = images[random.Next(images.Length)];
+        string temp = $"/images/{randomImage}";      
+        src = temp;  
+    }
+}
+
+
