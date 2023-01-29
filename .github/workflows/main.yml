@@ -6,6 +6,7 @@ on:
     branches: [ main ]
 
 permissions:
+  contents: write
   pull-requests: write
   issues: write
   repository-projects: write
@@ -43,6 +44,6 @@ jobs:
     - name: Commit wwwroot to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@v4
       with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
         BRANCH: gh-pages
         FOLDER: release/wwwroot
