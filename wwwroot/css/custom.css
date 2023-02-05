@@ -3,7 +3,7 @@
 }
 
 body {
-    background-color: blanchedalmond;
+    background: linear-gradient(to right, #FFF7E6, #FFE5B4, #FFB347, #FFA07A, #FF8C66, #FF6600);
 }
 
 #click-button {
