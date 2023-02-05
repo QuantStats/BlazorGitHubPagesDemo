@@ -43,4 +43,7 @@
 
 .selected {
     border: 5px solid pink !important;
+    transform: scale(1.5);
+    width: 300px;
+    height: auto;
 }
