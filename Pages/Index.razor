@@ -1,17 +1,42 @@
 ﻿@page "/"
-@using System.Runtime.InteropServices
-
+@inject HttpClient _client
 <PageTitle>Index</PageTitle>
 
 <h1><span style="color:red">❤</span>我们的合照<span style="color:red">❤</span></h1>
-
+<h2>@h2</h2>
 <img id="image" src=@src alt="Image" />
 <br />
 <button id="click-button" @onclick="RandomImage">🗘</button>
+<button id="click-button1" @onclick="IterImage">🗘</button>
+
+@{
+
+    string foo = Directory.GetCurrentDirectory();
+    string rootpath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "wwwroot");
+    var b = $"Physical location {AppDomain.CurrentDomain.BaseDirectory}";
+    var c = $"AppContext.BaseDir {AppContext.BaseDirectory}";
+    DirectoryInfo di = new DirectoryInfo(rootpath);
+    <p>@(di.Exists)</p>
+    //foreach (var file in di.EnumerateFiles())
+    //{
+    //    <p>@(file.Name)</p>
+    //}
+    <p>@b</p>
+    <p>@c</p>
+}
 
 
 @code {
     private string src = "./images/IMG_2012.JPG";
+    private string h2 = "fdskf";
+    private DirectoryInfo di = new DirectoryInfo(@"./images");
+
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    var byteData = await _client.GetStringAsync("./images/IMG_2012.JPG");
+    //    h2 = byteData.ToString();
+    //}
+
     private void RandomImage()
     {
         var images = new string[] { "IMG_2012.JPG", "IMG_2037.JPG", "IMG_2367.JPG",
@@ -20,11 +45,17 @@
                                     "IMG_5879.JPG", "IMG_5917.JPG", "IMG_6064.JPG",
                                     "IMG_6092.JPG", "IMG_6171.JPG"
 
-                                    };
+    };
         var random = new Random();
         var randomImage = images[random.Next(images.Length)];
         string temp = $"./images/{randomImage}";      
         src = temp;  
+    }
+
+    private void IterImage()
+    {
+        
+        h2 = di.Exists.ToString();
     }
 }
 
