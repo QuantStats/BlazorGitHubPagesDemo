@@ -1,30 +1,74 @@
 ﻿@page "/"
-@using System.Runtime.InteropServices
 
-<PageTitle>Index</PageTitle>
+<PageTitle>我们的合照</PageTitle>
 
-<h1><span style="color:red">❤</span>我们的合照<span style="color:red">❤</span></h1>
-
-<img id="image" src=@src alt="Image" />
+<h1 id="index-header"><span style="color:red">❤</span>我们的合照<span style="color:red">❤</span></h1>
 <br />
-<button id="click-button" @onclick="RandomImage">🗘</button>
+<div class="image-container">
+    @foreach (var image in images)
+    {
+        <img src=@($"./images/{image.ImageSource}") alt="Image" data-description="@image.Description" 
+        class="@(image.IsSelected ? "selected" : string.Empty)" @onclick="@(() => ShowDescription(image))">
+    }
+
+</div>
+
+<div class="description-container" style="display: @(isDescriptionVisible ? "block" : "none")">
+    <p>@descriptionText</p>
+</div>
 
 
 @code {
-    private string src = "./images/IMG_2012.JPG";
-    private void RandomImage()
+    private class Image
     {
-        var images = new string[] { "IMG_2012.JPG", "IMG_2037.JPG", "IMG_2367.JPG",
-                                    "IMG_2371.JPG", "IMG_2420.JPG", "IMG_5426.JPG",
-                                    "IMG_5709.JPG", "IMG_5760.JPG", "IMG_5838.JPG",
-                                    "IMG_5879.JPG", "IMG_5917.JPG", "IMG_6064.JPG",
-                                    "IMG_6092.JPG", "IMG_6171.JPG"
+        public string ImageSource { get; set; }
+        public string Description { get; set; }
+        public bool IsSelected { get; set; }
+    }
 
-                                    };
-        var random = new Random();
-        var randomImage = images[random.Next(images.Length)];
-        string temp = $"./images/{randomImage}";      
-        src = temp;  
+    private List<Image> images = new List<Image>
+    {
+        new Image { ImageSource = "IMG_2012.JPG", Description = "Bukit Tinggi French Village" },
+        new Image { ImageSource = "IMG_2037.JPG", Description = "Bukit Tinggi Japanese Garden" },
+        new Image { ImageSource = "IMG_2367.JPG", Description = "Tempurung Cave in Gopeng" },
+        new Image { ImageSource = "IMG_2371.JPG", Description = "Atop of Kellie's Castle in Batu Gajah" },
+        new Image { ImageSource = "IMG_2420.JPG", Description = "Cycling at Taiping Lake Gardens" },
+        new Image { ImageSource = "IMG_5426.JPG", Description = "Art gallery inside Aarhus Aros" },
+        new Image { ImageSource = "IMG_6092.JPG", Description = "Paris Disneyland" },
+        new Image { ImageSource = "IMG_5709.JPG", Description = "Frauenkirche in Munich Old Town" },
+        new Image { ImageSource = "IMG_5760.JPG", Description = "Residenz Museum Munich" },
+        new Image { ImageSource = "IMG_5838.JPG", Description = "Linderhof Palace in Bavaria" },
+        new Image { ImageSource = "IMG_5879.JPG", Description = "At Neuschwanstein Castle balcony overlooking the mountain" },
+        new Image { ImageSource = "IMG_5917.JPG", Description = "Eiffel Tower night scene" },
+        new Image { ImageSource = "IMG_5980.JPG", Description = "Louvre glass pyramid at night" },
+        new Image { ImageSource = "IMG_6064.JPG", Description = "Atop of Arc de Triomphe overlooking Paris" },
+        new Image { ImageSource = "IMG_6171.JPG", Description = "On a bridge in Amsterdam overlooking the canal" },
+    };
+    private bool isDescriptionVisible = false;
+    private string descriptionText = string.Empty;
+
+    private void ShowDescription(Image image)
+    {
+        if (image.IsSelected)
+        {
+            foreach (var img in images)
+            {
+                img.IsSelected = false;
+            }
+
+            isDescriptionVisible = false;
+            descriptionText = string.Empty;
+            return;
+        }
+
+        foreach (var img in images)
+        {
+            img.IsSelected = false;
+        }
+
+        image.IsSelected = true;
+        descriptionText = image.Description;
+        isDescriptionVisible = true;
     }
 }
 
