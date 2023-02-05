@@ -1,4 +1,12 @@
-﻿#click-button {
+﻿#index-header {
+    text-align: center;
+}
+
+body {
+    background-color: blanchedalmond;
+}
+
+#click-button {
     background-color: #000;
     border: solid;
     color: white;
