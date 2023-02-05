@@ -49,6 +49,18 @@
 
     private void ShowDescription(Image image)
     {
+        if (image.IsSelected)
+        {
+            foreach (var img in images)
+            {
+                img.IsSelected = false;
+            }
+
+            isDescriptionVisible = false;
+            descriptionText = string.Empty;
+            return;
+        }
+
         foreach (var img in images)
         {
             img.IsSelected = false;
